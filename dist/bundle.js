@@ -21478,7 +21478,7 @@
 
 
 	// module
-	exports.push([module.id, "", ""]);
+	exports.push([module.id, "body {\n  background: #d5d5d5;\n  font-family: arial;\n  color: #FAFAFA;\n  text-transform: uppercase;\n}\n\n.dashboard {\n  background: #333;\n  width: 500px;\n  margin: 70px auto;\n  box-shadow: 0 4px 0px #333;\n  border-radius: 15px;\n  padding-bottom: 20px;\n}\n\nimg {\n  width: 100%;\n}\n\n.truck-indicator-text {\n  flex-grow: 1;\n}\n.truck-indicator-img {\n  /*width: 170px;*/\n  flex-grow: 2;\n}\n\n.truck-indicator {\n  padding: 5px 10px;\n  text-align: center;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: #222;\n  border-radius: 15px 15px 0 0;\n  border-bottom: solid 2px #444;\n}\n\n.currentWeight {\n  text-align: center;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n\n.weight-number {\n  font-size: 60px;\n}\n", ""]);
 
 	// exports
 
@@ -21881,17 +21881,42 @@
 				return _react2.default.createElement(
 					'div',
 					null,
-					_react2.default.createElement(_SoundCtrl2.default, { startPlay: this.state.shouldPlay }),
 					_react2.default.createElement(
-						'h1',
-						null,
-						'Current Weight: ',
-						this.state.weight
-					),
-					_react2.default.createElement(
-						'p',
-						null,
-						this.state.shouldPlay
+						'div',
+						{ className: 'dashboard' },
+						_react2.default.createElement(_SoundCtrl2.default, { startPlay: this.state.shouldPlay }),
+						_react2.default.createElement(
+							'div',
+							{ className: 'truck-indicator' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'truck-indicator-text' },
+								_react2.default.createElement(
+									'h2',
+									null,
+									'No Truck'
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'truck-indicator-img' },
+								_react2.default.createElement('img', { src: '/images/truck-on.png' })
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'currentWeight' },
+							_react2.default.createElement(
+								'h2',
+								null,
+								'CURRENT WEIGHT:'
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'weight-number' },
+								'293420'
+							)
+						)
 					)
 				);
 			}

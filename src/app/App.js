@@ -52,9 +52,22 @@ class App extends Component {
 	render() {
 		return (
 			<div>
-				<SoundCtrl startPlay={this.state.shouldPlay}/>
-				<h1>Current Weight: {this.state.weight}</h1>
-				 <p>{this.state.shouldPlay}</p>
+				<div className="dashboard">
+					<SoundCtrl startPlay={this.state.shouldPlay}/>
+					<div className="truck-indicator">
+						<div className="truck-indicator-text">
+							<h2>No Truck</h2>
+						</div>
+						<div className="truck-indicator-img">
+							<img src="/images/truck-on.png"></img>
+						</div>
+					</div>
+					<div className="currentWeight">
+						<h2>CURRENT WEIGHT:</h2>
+						<div className="weight-number">293420</div>
+					</div>
+				</div>
+
 			</div>
 		);
 	}

@@ -1,0 +1,49 @@
+body {
+  background: #d5d5d5;
+  font-family: arial;
+  color: #FAFAFA;
+  text-transform: uppercase;
+}
+
+.dashboard {
+  background: #333;
+  width: 500px;
+  margin: 70px auto;
+  box-shadow: 0 4px 0px #333;
+  border-radius: 15px;
+  padding-bottom: 20px;
+}
+
+img {
+  width: 100%;
+}
+
+.truck-indicator-text {
+  flex-grow: 1;
+}
+.truck-indicator-img {
+  /*width: 170px;*/
+  flex-grow: 2;
+}
+
+.truck-indicator {
+  padding: 5px 10px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #222;
+  border-radius: 15px 15px 0 0;
+  border-bottom: solid 2px #444;
+}
+
+.currentWeight {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.weight-number {
+  font-size: 60px;
+}
