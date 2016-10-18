@@ -6,7 +6,7 @@ class SoundCtrl extends Component {
 
 	render() {
 		return <Sound
-		url="sounds/153213__freezeman__beep1.wav"
+		url="sounds/213795__austin1234575__beep-1-sec.wav"
 		playStatus={Sound.status.PLAYING}
 		playFromPosition={0 /* in milliseconds */}
 		onLoading={this.handleSongLoading}
