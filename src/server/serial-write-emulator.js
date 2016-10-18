@@ -10,12 +10,12 @@ port.on('open', function() {
   console.log('Opened port. Going to send example data.');
 
   setInterval(function() {
-    var integer = chance.integer({min:0, max: 300});
-    var string = integer.toString();
-    var end = String.fromCharCode(170);
-    var whole = string + end;
-    port.write(string + end);
-    console.log('wrote', integer);
+    //var integer = chance.integer({min:0, max: 300});
+
+    var string = "☻1(  12360    00"
+
+    port.write(string);
+    console.log('wrote', string);
   }, 1000)
 
 });

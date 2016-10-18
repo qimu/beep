@@ -44,15 +44,6 @@ var io = require('socket.io')(http);
 var chance = require('chance')();
 io.on('connection', function(socket) {
   console.log('The browser is connected on socket.io');
-
-  // emulate sending event to ebrowser for testing
-
-  setInterval(()=>{
-    var integer = chance.integer({min:0, max: 300});
-    var string = integer.toString();
-    io.emit('newWeight', string);
-  }, 1000)
-
 })
 
 
@@ -60,8 +51,7 @@ io.on('connection', function(socket) {
 
 var SerialPort = require("serialport");
 var port = new SerialPort("COM3", {
-  baudRate: 57600,
-  parser: SerialPort.parsers.readline(String.fromCharCode(170))
+  baudRate: 9600
 });
 
 port.on('open', function() {
@@ -73,10 +63,16 @@ port.on('error', function(err) {
 });
 
 port.on('data', function(data) {
-  console.log(data);
+  var dataString = data.toString('utf-8');
+
+  // receivies something like "☻1   22520    00"
+  // parse it
+  var elements = dataString.split("  ");
+  var mainWeight = elements[elements.length - 3];
+  console.log(`Received data from scale ${dataString}, parsed out main weight is ${mainWeight}. Will send to browser.`);
 
   // when data is received on serial port, send it to the browser
-  //io.emit('newWeight', integer);
+  io.emit('newWeight', mainWeight);
 });
 
 // start the http server
