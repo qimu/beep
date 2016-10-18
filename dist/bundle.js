@@ -21819,7 +21819,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var TEST_WEIGHT = 500; // in pounds
+	var TRIGGER_WEIGHT = 500; // in pounds
 	var MUTE_DURATION = 5000; // 5 seconds
 
 	var App = function (_Component) {
@@ -21867,7 +21867,7 @@
 				});
 
 				// if 5 seconds not passed since last beep, don't beep
-				if (weight >= TEST_WEIGHT && this.state.elaspedTime >= MUTE_DURATION) {
+				if (weight >= TRIGGER_WEIGHT && this.state.elaspedTime >= MUTE_DURATION) {
 					this.setState({
 						shouldPlay: true,
 						elaspedTime: 0
@@ -21897,13 +21897,13 @@
 								_react2.default.createElement(
 									'h2',
 									null,
-									this.state.weight >= TEST_WEIGHT ? "Truck is On" : "No Truck"
+									this.state.weight >= TRIGGER_WEIGHT ? "Truck is On" : "No Truck"
 								)
 							),
 							_react2.default.createElement(
 								'div',
 								{ className: 'truck-indicator-img' },
-								_react2.default.createElement('img', { src: this.state.weight >= TEST_WEIGHT ? "/images/truck-on.png" : "/images/truck-off.png" })
+								_react2.default.createElement('img', { src: this.state.weight >= TRIGGER_WEIGHT ? "/images/truck-on.png" : "/images/truck-off.png" })
 							)
 						),
 						_react2.default.createElement(

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SoundCtrl from './SoundCtrl';
 
-var TEST_WEIGHT = 500; // in pounds
+var TRIGGER_WEIGHT = 500; // in pounds
 var MUTE_DURATION = 5000; // 5 seconds
 
 class App extends Component {
@@ -39,7 +39,7 @@ class App extends Component {
 		})
 
 		// if 5 seconds not passed since last beep, don't beep
-		if (weight >= TEST_WEIGHT && this.state.elaspedTime >= MUTE_DURATION) {
+		if (weight >= TRIGGER_WEIGHT && this.state.elaspedTime >= MUTE_DURATION) {
 			this.setState({
 				shouldPlay: true,
 				elaspedTime: 0
@@ -59,10 +59,10 @@ class App extends Component {
 					<SoundCtrl startPlay={this.state.shouldPlay}/>
 					<div className="truck-indicator">
 						<div className="truck-indicator-text">
-							<h2>{ this.state.weight >= TEST_WEIGHT ? "Truck is On" : "No Truck" }</h2>
+							<h2>{ this.state.weight >= TRIGGER_WEIGHT ? "Truck is On" : "No Truck" }</h2>
 						</div>
 						<div className="truck-indicator-img">
-							<img src= { this.state.weight >= TEST_WEIGHT ? "/images/truck-on.png" : "/images/truck-off.png" }></img>
+							<img src= { this.state.weight >= TRIGGER_WEIGHT ? "/images/truck-on.png" : "/images/truck-off.png" }></img>
 						</div>
 					</div>
 					<div className="currentWeight">
