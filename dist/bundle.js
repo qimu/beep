@@ -21828,7 +21828,7 @@
 			var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
 			_this.state = {
-				weight: 3,
+				weight: 40000,
 				socket: props.socket,
 				shouldPlay: false,
 				elaspedTime: 0,

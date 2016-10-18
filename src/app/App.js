@@ -6,7 +6,7 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			weight: 3,
+			weight: 40000,
 			socket: props.socket,
 			shouldPlay: false,
 			elaspedTime: 0,
