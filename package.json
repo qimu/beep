@@ -1,7 +1,7 @@
 {
-  "name": "qi-react-starter",
+  "name": "serial-beep",
   "version": "1.0.0",
-  "description": "Qi React.js Starter",
+  "description": "serial-beep",
   "main": "src/server/index.js",
   "scripts": {
     "start": "nodemon src/server/index.js",
