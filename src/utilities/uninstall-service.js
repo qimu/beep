@@ -5,7 +5,7 @@ var Service = require('node-windows').Service;
 // Create a new service object
 var svc = new Service({
   name:'serial-beep',
-  script: 'src/utilities/index.js'
+  script: '../server/index.js'
 });
 
 // Listen for the "uninstall" event so we know when it's done.
