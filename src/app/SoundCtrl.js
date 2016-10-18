@@ -18,7 +18,6 @@ class SoundCtrl extends Component {
 	}
 
 	render() {
-    console.log('render ctrl again ---------');
 		return <Sound
 		url="sounds/213795__austin1234575__beep-1-sec.wav"
 		playStatus={this.props.startPlay ? Sound.status.PLAYING : Sound.status.STOPPED}

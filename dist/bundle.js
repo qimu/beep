@@ -21848,17 +21848,17 @@
 					var weight = parseInt(weightString);
 					_this2.newWeightReceived(weight);
 				});
-				setInterval(function () {
-					var now = Date.now();
-					_this2.setState({
-						previousTime: now,
-						elaspedTime: _this2.state.elaspedTime + (now - _this2.state.previousTime)
-					});
-				}, 100);
 			}
 		}, {
 			key: 'newWeightReceived',
 			value: function newWeightReceived(weight) {
+				var now = Date.now();
+
+				this.setState({
+					previousTime: now,
+					elaspedTime: this.state.elaspedTime + (now - this.state.previousTime)
+				});
+
 				// always update the weight on screen
 				this.setState({
 					weight: weight
@@ -21866,7 +21866,6 @@
 
 				// if 5 seconds not passed since last beep, don't beep
 				if (weight > 100 && this.state.elaspedTime >= 5000) {
-					console.log('should play!!!!!!');
 					this.setState({
 						shouldPlay: true,
 						elaspedTime: 0
@@ -35995,7 +35994,6 @@
 		}, {
 			key: 'render',
 			value: function render() {
-				console.log('render ctrl again ---------');
 				return _react2.default.createElement(Sound, {
 					url: 'sounds/213795__austin1234575__beep-1-sec.wav',
 					playStatus: this.props.startPlay ? Sound.status.PLAYING : Sound.status.STOPPED,
