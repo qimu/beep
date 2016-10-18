@@ -40,46 +40,49 @@ app.use(function(req, res, next) {
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-// mostly testing
-var chance = require('chance')();
 io.on('connection', function(socket) {
   console.log('The browser is connected on socket.io');
 })
 
-
 // receiving data on serial port
 
 var SerialPort = require("serialport");
-var port = new SerialPort("COM3", {
-  baudRate: 9600
-});
 
-port.on('open', function() {
-  console.log('Serial Port Opened, ready to receive data.');
-});
+// only run is this is on Windows
+if (process.platform == "win32") {
 
-port.on('error', function(err) {
-  console.log('Error: ', err.message);
-});
+  var port = new SerialPort("COM3", {
+    baudRate: 9600
+  });
 
-port.on('data', function(data) {
-  var dataString = data.toString('utf-8');
+  port.on('open', function() {
+    console.log('Serial Port Opened, ready to receive data.');
+  });
 
-  console.log("\n========================");
-  console.log('received data from scale:');
-  console.log(dataString);
+  port.on('error', function(err) {
+    console.log('Error: ', err.message);
+  });
 
-  // receivies something like "☻1   22520    00"
-  // parse it
-  var elements = dataString.split("  ");
-  var mainWeightString = elements[elements.length - 3];
-  var mainWeight = parseInt(mainWeightString);
-  console.log(`parsed out main weight is ${mainWeight}. Will send to browser.`);
-  console.log("=======================");
+  port.on('data', function(data) {
+    var dataString = data.toString('utf-8');
 
-  // when data is received on serial port, send it to the browser
-  io.emit('newWeight', mainWeight);
-});
+    console.log("\n========================");
+    console.log('received data from scale:');
+    console.log(dataString);
+
+    // receivies something like "☻1   22520    00"
+    // parse it
+    var elements = dataString.split("  ");
+    var mainWeightString = elements[elements.length - 3];
+    var mainWeight = parseInt(mainWeightString);
+    console.log(`parsed out main weight is ${mainWeight}. Will send to browser.`);
+    console.log("=======================");
+
+    // when data is received on serial port, send it to the browser
+    io.emit('newWeight', mainWeight);
+  });
+}
+
 
 // start the http server
 http.listen(3000, function(){
