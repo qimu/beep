@@ -9,12 +9,12 @@
     "watch": "webpack --config config/webpack.js --watch --colors",
     "install-service": "node src/utilities/install-service.js",
     "uninstall-service": "node src/utilities/uninstall-service.js"
-
   },
   "author": "Mu, Qi",
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "node-windows": "^0.1.11",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
     "react-sound": "^0.5.2",
