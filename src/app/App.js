@@ -1,20 +1,5 @@
 import React, { Component } from 'react';
-
-
-var Sound = require('react-sound');
-class SoundCtrl extends Component {
-
-	render() {
-		return <Sound
-		url="sounds/213795__austin1234575__beep-1-sec.wav"
-		playStatus={Sound.status.PLAYING}
-		playFromPosition={0 /* in milliseconds */}
-		onLoading={this.handleSongLoading}
-		onPlaying={this.handleSongPlaying}
-		onFinishedPlaying={this.handleSongFinishedPlaying} />
-	}
-
-}
+import SoundCtrl from './SoundCtrl';
 
 class App extends Component {
 
@@ -22,31 +7,34 @@ class App extends Component {
 		super(props);
 		this.state = {
 			weight: 0,
-			socket: props.socket
+			socket: props.socket,
+			shouldPlay: false
 		}
 
 		this.newWeightReceived = this.newWeightReceived.bind(this);
 	}
 
 	componentDidMount() {
-		this.state.socket.on('newWeight', weight => {
+		this.state.socket.on('newWeight', weightString => {
+			var weight = parseInt(weightString);
 			this.newWeightReceived(weight);
 		})
 	}
 
 	newWeightReceived(weight) {
 		this.setState({
-			weight: weight
+			weight: weight,
+			shouldPlay: weight > 100 ? true : false
 		})
-
 
 	}
 
 	render() {
 		return (
 			<div>
-				<SoundCtrl />
+				<SoundCtrl startPlay={this.state.shouldPlay}/>
 				<h1>Current Weight: {this.state.weight}</h1>
+				 <p>{this.state.shouldPlay}</p>
 			</div>
 		);
 	}

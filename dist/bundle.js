@@ -21807,6 +21807,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _SoundCtrl = __webpack_require__(236);
+
+	var _SoundCtrl2 = _interopRequireDefault(_SoundCtrl);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21815,64 +21819,40 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Sound = __webpack_require__(234);
-
-	var SoundCtrl = function (_Component) {
-		_inherits(SoundCtrl, _Component);
-
-		function SoundCtrl() {
-			_classCallCheck(this, SoundCtrl);
-
-			return _possibleConstructorReturn(this, (SoundCtrl.__proto__ || Object.getPrototypeOf(SoundCtrl)).apply(this, arguments));
-		}
-
-		_createClass(SoundCtrl, [{
-			key: 'render',
-			value: function render() {
-				return _react2.default.createElement(Sound, {
-					url: 'sounds/213795__austin1234575__beep-1-sec.wav',
-					playStatus: Sound.status.PLAYING,
-					playFromPosition: 0 /* in milliseconds */,
-					onLoading: this.handleSongLoading,
-					onPlaying: this.handleSongPlaying,
-					onFinishedPlaying: this.handleSongFinishedPlaying });
-			}
-		}]);
-
-		return SoundCtrl;
-	}(_react.Component);
-
-	var App = function (_Component2) {
-		_inherits(App, _Component2);
+	var App = function (_Component) {
+		_inherits(App, _Component);
 
 		function App(props) {
 			_classCallCheck(this, App);
 
-			var _this2 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+			var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-			_this2.state = {
+			_this.state = {
 				weight: 0,
-				socket: props.socket
+				socket: props.socket,
+				shouldPlay: false
 			};
 
-			_this2.newWeightReceived = _this2.newWeightReceived.bind(_this2);
-			return _this2;
+			_this.newWeightReceived = _this.newWeightReceived.bind(_this);
+			return _this;
 		}
 
 		_createClass(App, [{
 			key: 'componentDidMount',
 			value: function componentDidMount() {
-				var _this3 = this;
+				var _this2 = this;
 
-				this.state.socket.on('newWeight', function (weight) {
-					_this3.newWeightReceived(weight);
+				this.state.socket.on('newWeight', function (weightString) {
+					var weight = parseInt(weightString);
+					_this2.newWeightReceived(weight);
 				});
 			}
 		}, {
 			key: 'newWeightReceived',
 			value: function newWeightReceived(weight) {
 				this.setState({
-					weight: weight
+					weight: weight,
+					shouldPlay: weight > 100 ? true : false
 				});
 			}
 		}, {
@@ -21881,12 +21861,17 @@
 				return _react2.default.createElement(
 					'div',
 					null,
-					_react2.default.createElement(SoundCtrl, null),
+					_react2.default.createElement(_SoundCtrl2.default, { startPlay: this.state.shouldPlay }),
 					_react2.default.createElement(
 						'h1',
 						null,
 						'Current Weight: ',
 						this.state.weight
+					),
+					_react2.default.createElement(
+						'p',
+						null,
+						this.state.shouldPlay
 					)
 				);
 			}
@@ -35937,6 +35922,78 @@
 	}(window));
 
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(185)(module)))
+
+/***/ },
+/* 236 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Sound = __webpack_require__(234);
+
+	var SoundCtrl = function (_Component) {
+		_inherits(SoundCtrl, _Component);
+
+		function SoundCtrl(props) {
+			_classCallCheck(this, SoundCtrl);
+
+			var _this = _possibleConstructorReturn(this, (SoundCtrl.__proto__ || Object.getPrototypeOf(SoundCtrl)).call(this, props));
+
+			console.log(props.startPlay);
+			_this.state = {
+				status: _this.props.startPlay ? Sound.status.PLAYING : Sound.status.STOPPED
+			};
+
+			return _this;
+		}
+
+		_createClass(SoundCtrl, [{
+			key: 'handleSongFinishedPlaying',
+			value: function handleSongFinishedPlaying() {
+				this.setState({
+					status: Sound.status.STOPPED
+				});
+			}
+		}, {
+			key: 'handleSongPlaying',
+			value: function handleSongPlaying() {
+				console.log('start playing!!!');
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(Sound, {
+					url: 'sounds/213795__austin1234575__beep-1-sec.wav',
+					playStatus: this.state.status,
+					playFromPosition: 0 /* in milliseconds */,
+					onLoading: this.handleSongLoading,
+					onPlaying: this.handleSongPlaying.bind(this),
+					onFinishedPlaying: this.handleSongFinishedPlaying.bind(this) });
+			}
+		}]);
+
+		return SoundCtrl;
+	}(_react.Component);
+
+	exports.default = SoundCtrl;
 
 /***/ }
 /******/ ]);
