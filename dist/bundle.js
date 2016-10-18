@@ -21844,8 +21844,7 @@
 			value: function componentDidMount() {
 				var _this2 = this;
 
-				this.state.socket.on('newWeight', function (weightString) {
-					var weight = parseInt(weightString);
+				this.state.socket.on('newWeight', function (weight) {
 					_this2.newWeightReceived(weight);
 				});
 			}
@@ -21865,7 +21864,7 @@
 				});
 
 				// if 5 seconds not passed since last beep, don't beep
-				if (weight > 100 && this.state.elaspedTime >= 5000) {
+				if (weight >= 500 && this.state.elaspedTime >= 5000) {
 					this.setState({
 						shouldPlay: true,
 						elaspedTime: 0

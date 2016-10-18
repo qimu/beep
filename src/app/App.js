@@ -17,8 +17,7 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		this.state.socket.on('newWeight', weightString => {
-			var weight = parseInt(weightString);
+		this.state.socket.on('newWeight', weight => {
 			this.newWeightReceived(weight);
 		})
 	}
@@ -37,7 +36,7 @@ class App extends Component {
 		})
 
 		// if 5 seconds not passed since last beep, don't beep
-		if (weight > 100 && this.state.elaspedTime >= 5000) {
+		if (weight >= 500 && this.state.elaspedTime >= 5000) {
 			this.setState({
 				shouldPlay: true,
 				elaspedTime: 0

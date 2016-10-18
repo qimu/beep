@@ -65,11 +65,17 @@ port.on('error', function(err) {
 port.on('data', function(data) {
   var dataString = data.toString('utf-8');
 
+  console.log("\n========================");
+  console.log('received data from scale:');
+  console.log(dataString);
+
   // receivies something like "☻1   22520    00"
   // parse it
   var elements = dataString.split("  ");
-  var mainWeight = elements[elements.length - 3];
-  console.log(`Received data from scale ${dataString}, parsed out main weight is ${mainWeight}. Will send to browser.`);
+  var mainWeightString = elements[elements.length - 3];
+  var mainWeight = parseInt(mainWeightString);
+  console.log(`parsed out main weight is ${mainWeight}. Will send to browser.`);
+  console.log("=======================");
 
   // when data is received on serial port, send it to the browser
   io.emit('newWeight', mainWeight);
