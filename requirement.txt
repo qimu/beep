@@ -1,0 +1,1 @@
+I work at Duncan Galvanizing in Everett.  We have an industrial weight scale that also streams the weight in an ascii stream over a serial port at about 1 hertz.  I was hoping to write an application for a windows pc that would monitor the serial port and play a sound when “X” weight is exceeded. 
