@@ -12,7 +12,6 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.15.2",
-    "node-windows": "^0.1.11",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
     "react-sound": "^0.5.2",
