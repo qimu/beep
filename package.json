@@ -6,9 +6,7 @@
   "scripts": {
     "start": "nodemon src/server/index.js",
     "webpack": "webpack --config config/webpack.js",
-    "watch": "webpack --config config/webpack.js --watch --colors",
-    "install-service": "node src/utilities/install-service.js",
-    "uninstall-service": "node src/utilities/uninstall-service.js"
+    "watch": "webpack --config config/webpack.js --watch --colors"
   },
   "author": "Mu, Qi",
   "license": "MIT",
