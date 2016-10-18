@@ -21830,7 +21830,9 @@
 			_this.state = {
 				weight: 0,
 				socket: props.socket,
-				shouldPlay: false
+				shouldPlay: false,
+				elaspedTime: 0,
+				previousTime: 0
 			};
 
 			_this.newWeightReceived = _this.newWeightReceived.bind(_this);
@@ -21846,14 +21848,34 @@
 					var weight = parseInt(weightString);
 					_this2.newWeightReceived(weight);
 				});
+				setInterval(function () {
+					var now = Date.now();
+					_this2.setState({
+						previousTime: now,
+						elaspedTime: _this2.state.elaspedTime + (now - _this2.state.previousTime)
+					});
+				}, 100);
 			}
 		}, {
 			key: 'newWeightReceived',
 			value: function newWeightReceived(weight) {
+				// always update the weight on screen
 				this.setState({
-					weight: weight,
-					shouldPlay: weight > 100 ? true : false
+					weight: weight
 				});
+
+				// if 5 seconds not passed since last beep, don't beep
+				if (weight > 100 && this.state.elaspedTime >= 5000) {
+					console.log('should play!!!!!!');
+					this.setState({
+						shouldPlay: true,
+						elaspedTime: 0
+					});
+				} else {
+					this.setState({
+						shouldPlay: false
+					});
+				}
 			}
 		}, {
 			key: 'render',
@@ -35955,14 +35977,7 @@
 		function SoundCtrl(props) {
 			_classCallCheck(this, SoundCtrl);
 
-			var _this = _possibleConstructorReturn(this, (SoundCtrl.__proto__ || Object.getPrototypeOf(SoundCtrl)).call(this, props));
-
-			console.log(props.startPlay);
-			_this.state = {
-				status: _this.props.startPlay ? Sound.status.PLAYING : Sound.status.STOPPED
-			};
-
-			return _this;
+			return _possibleConstructorReturn(this, (SoundCtrl.__proto__ || Object.getPrototypeOf(SoundCtrl)).call(this, props));
 		}
 
 		_createClass(SoundCtrl, [{
@@ -35975,14 +35990,15 @@
 		}, {
 			key: 'handleSongPlaying',
 			value: function handleSongPlaying() {
-				console.log('start playing!!!');
+				// console.log('start playing!!!');
 			}
 		}, {
 			key: 'render',
 			value: function render() {
+				console.log('render ctrl again ---------');
 				return _react2.default.createElement(Sound, {
 					url: 'sounds/213795__austin1234575__beep-1-sec.wav',
-					playStatus: this.state.status,
+					playStatus: this.props.startPlay ? Sound.status.PLAYING : Sound.status.STOPPED,
 					playFromPosition: 0 /* in milliseconds */,
 					onLoading: this.handleSongLoading,
 					onPlaying: this.handleSongPlaying.bind(this),

@@ -8,7 +8,9 @@ class App extends Component {
 		this.state = {
 			weight: 0,
 			socket: props.socket,
-			shouldPlay: false
+			shouldPlay: false,
+			elaspedTime: 0,
+			previousTime: 0
 		}
 
 		this.newWeightReceived = this.newWeightReceived.bind(this);
@@ -19,13 +21,33 @@ class App extends Component {
 			var weight = parseInt(weightString);
 			this.newWeightReceived(weight);
 		})
+		setInterval(()=>{
+			var now = Date.now();
+			this.setState({
+				previousTime: now,
+				elaspedTime: this.state.elaspedTime + (now - this.state.previousTime)
+			})
+		}, 100)
 	}
 
 	newWeightReceived(weight) {
+		// always update the weight on screen
 		this.setState({
-			weight: weight,
-			shouldPlay: weight > 100 ? true : false
+			weight: weight
 		})
+
+		// if 5 seconds not passed since last beep, don't beep
+		if (weight > 100 && this.state.elaspedTime >= 5000) {
+			console.log('should play!!!!!!');
+			this.setState({
+				shouldPlay: true,
+				elaspedTime: 0
+			})
+		} else {
+			this.setState({
+				shouldPlay: false
+			})
+		}
 
 	}
 

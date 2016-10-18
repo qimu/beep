@@ -5,11 +5,6 @@ class SoundCtrl extends Component {
 
 	constructor(props) {
 		super(props);
-		console.log(props.startPlay);
-		this.state = {
-			status: this.props.startPlay ? Sound.status.PLAYING : Sound.status.STOPPED
-		}
-
 	}
 
 	handleSongFinishedPlaying() {
@@ -19,13 +14,14 @@ class SoundCtrl extends Component {
 	}
 
 	handleSongPlaying() {
-		console.log('start playing!!!');
+		// console.log('start playing!!!');
 	}
 
 	render() {
+    console.log('render ctrl again ---------');
 		return <Sound
 		url="sounds/213795__austin1234575__beep-1-sec.wav"
-		playStatus={this.state.status}
+		playStatus={this.props.startPlay ? Sound.status.PLAYING : Sound.status.STOPPED}
 		playFromPosition={0 /* in milliseconds */}
 		onLoading={this.handleSongLoading}
 		onPlaying={this.handleSongPlaying.bind(this)}
