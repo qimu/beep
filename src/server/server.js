@@ -37,9 +37,21 @@ app.use(function(req, res, next) {
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+// mostly testing
+var chance = require('chance')();
 io.on('connection', function(socket) {
   console.log('The browser is connected on socket.io');
+
+  // emulate sending event to ebrowser for testing
+
+  setInterval(()=>{
+    var integer = chance.integer({min:0, max: 300});
+    var string = integer.toString();
+    io.emit('newWeight', string);
+  }, 1000)
+
 })
+
 
 // receiving data on serial port
 

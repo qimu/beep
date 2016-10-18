@@ -5,15 +5,21 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			weight: 0
+			weight: 0,
+			socket: props.socket
 		}
-		props.socket.on('newWeight', weight => {
-			newWeightReceived(weight);
+
+		this.newWeightReceived = this.newWeightReceived.bind(this);
+	}
+
+	componentDidMount() {
+		console.log('mouncted');
+		this.state.socket.on('newWeight', weight => {
+			this.newWeightReceived(weight);
 		})
 	}
 
 	newWeightReceived(weight) {
-		console.log(weight);
 		this.setState({
 			weight: weight
 		})
@@ -22,7 +28,6 @@ class App extends Component {
 	render() {
 		return (
 			<div>
-
 				<h1>Current Weight: {this.state.weight}</h1>
 			</div>
 		);
