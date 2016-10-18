@@ -3,7 +3,6 @@ var SerialPort = require("serialport");
 var port = new SerialPort("COM4", {
   baudRate: 9600
 });
-var chance = require('chance')();
 
 // write a string every second
 port.on('open', function() {
