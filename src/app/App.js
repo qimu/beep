@@ -6,7 +6,7 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			weight: 0,
+			weight: 3,
 			socket: props.socket,
 			shouldPlay: false,
 			elaspedTime: 0,
@@ -56,15 +56,15 @@ class App extends Component {
 					<SoundCtrl startPlay={this.state.shouldPlay}/>
 					<div className="truck-indicator">
 						<div className="truck-indicator-text">
-							<h2>No Truck</h2>
+							<h2>{ this.state.weight >= 500 ? "Truck is On" : "No Truck" }</h2>
 						</div>
 						<div className="truck-indicator-img">
-							<img src="/images/truck-on.png"></img>
+							<img src= { this.state.weight >= 500 ? "/images/truck-on.png" : "/images/truck-off.png" }></img>
 						</div>
 					</div>
 					<div className="currentWeight">
 						<h2>CURRENT WEIGHT:</h2>
-						<div className="weight-number">293420</div>
+						<div className="weight-number">{this.state.weight}</div>
 					</div>
 				</div>
 

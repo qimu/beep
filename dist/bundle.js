@@ -21828,7 +21828,7 @@
 			var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
 			_this.state = {
-				weight: 0,
+				weight: 3,
 				socket: props.socket,
 				shouldPlay: false,
 				elaspedTime: 0,
@@ -21894,13 +21894,13 @@
 								_react2.default.createElement(
 									'h2',
 									null,
-									'No Truck'
+									this.state.weight >= 500 ? "Truck is On" : "No Truck"
 								)
 							),
 							_react2.default.createElement(
 								'div',
 								{ className: 'truck-indicator-img' },
-								_react2.default.createElement('img', { src: '/images/truck-on.png' })
+								_react2.default.createElement('img', { src: this.state.weight >= 500 ? "/images/truck-on.png" : "/images/truck-off.png" })
 							)
 						),
 						_react2.default.createElement(
@@ -21914,7 +21914,7 @@
 							_react2.default.createElement(
 								'div',
 								{ className: 'weight-number' },
-								'293420'
+								this.state.weight
 							)
 						)
 					)
