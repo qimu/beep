@@ -10,8 +10,11 @@ var server;
 
 const PATH_STYLES = path.resolve(__dirname, '../client/styles');
 const PATH_DIST = path.resolve(__dirname, '../../dist');
+const SOUNDS_DIST = path.resolve(__dirname, '../../sounds');
 
 app.use('/styles', express.static(PATH_STYLES));
+app.use('/sounds', express.static(SOUNDS_DIST));
+
 app.use(express.static(PATH_DIST));
 
 app.get('/', (req, res) => {
