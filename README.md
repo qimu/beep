@@ -16,7 +16,7 @@ beep when a truck is on a scale that connects to a computer via serial port
 * Show current weight on a nice UI
 * Show truck on or off images to indicate the status
 * Works on Both macOS and Windows
-* Have a emulator for emulating data from the real equipment without connecting to it
+* Have a emulator for emulating data from the real equipment without connecting to it (src/server/serial-write-emulator.js)
 
 ## Technology Used
 
