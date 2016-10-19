@@ -57,3 +57,7 @@ To remove the service, run:
 cd src\utilities
 node uninstall-service
 ```
+
+## Suggestion
+
+This project can be used as a demo for using node-serial library and socket.io library together in node.js. 
