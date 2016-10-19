@@ -66,7 +66,7 @@ port.on('data', function(data) {
   var dataString = data.toString('utf-8');
 
   console.log("\n========================");
-  console.log('received data from scale:');
+  console.log('server received data from scale:');
   console.log(dataString);
 
   // receivies something like "☻1   22520    00"
@@ -74,7 +74,7 @@ port.on('data', function(data) {
   var elements = dataString.split("  ");
   var mainWeightString = elements[elements.length - 3];
   var mainWeight = parseInt(mainWeightString);
-  console.log(`parsed out main weight is ${mainWeight}. Will send to browser.`);
+  console.log(`parsed out main weight is ${mainWeight}. Will send to browser via socket.io.`);
   console.log("=======================");
 
   // when data is received on serial port, send it to the browser

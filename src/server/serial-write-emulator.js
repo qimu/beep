@@ -10,9 +10,11 @@ port.on('open', function() {
   console.log('Opened port. Going to send example data.');
 
   setInterval(function() {
-    var string = "☻1(  0123123    00"
+    var weight1 = 29680;
+    var weight2 = 0;
+    var string = `☻1(  ${weight2}    00`
     port.write(string);
-    console.log('wrote', string);
+    console.log(`emulator wrote from serialport ${serialport}: ${string}`);
   }, 1000)
 
 });
