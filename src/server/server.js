@@ -66,7 +66,7 @@ port.on('data', function(data) {
   var dataString = data.toString('utf-8');
 
   console.log("\n========================");
-  console.log('server received data from scale:');
+  console.log(`server received data from ${serialport} `);
   console.log(dataString);
 
   // receivies something like "☻1   22520    00"
