@@ -47,7 +47,7 @@ io.on('connection', function(socket) {
 // receiving data on serial port
 
 var SerialPort = require("serialport");
-var serialport = process.platform == "win32" ? "COM4" : "/dev/ttys002"
+var serialport = process.platform == "win32" ? "COM5" : "/dev/ttys002"
 
 // only run is this is on Windows
 var port = new SerialPort(serialport, {
