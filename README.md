@@ -24,7 +24,7 @@ Node.js and React.js
 
 ## Infrastructure
 
-The Node.js opened the serial port and read data via event. Each time, it gets the data, which is a string, it parses out the weight, in pounds, and send this number to the React.js app in the browser via socket.io.
+The Node.js opened the serial port and read data via event. Each time, it gets the data, which is a string, it parses out the weight, in pounds, and send this number to the React.js app in the browser via socket.io. Beeping and changing the truck image is handled in the React.js app.
 
 ## Customize it
 
