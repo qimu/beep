@@ -39,6 +39,7 @@ npm install nodemon -g
 npm run webpack
 npm run start
 ```
+Check your http://localhost:3000/ or  `open http://localhost:3000/`
 
 ## Run the Node.js Server as a Service Under Windows
 
@@ -56,5 +57,3 @@ To remove the service, run:
 cd src\utilities
 node uninstall-service
 ```
-
-Check your http://localhost:3000/ or  `open http://localhost:3000/`
