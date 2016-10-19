@@ -26,13 +26,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 // Additional middleware which will set headers that we need on each request.
 app.use(function(req, res, next) {
-    // Set permissive CORS header - this allows this server to be used only as
-    // an API server in conjunction with something like webpack-dev-server.
-    res.setHeader('Access-Control-Allow-Origin', '*');
+  // Set permissive CORS header - this allows this server to be used only as
+  // an API server in conjunction with something like webpack-dev-server.
+  res.setHeader('Access-Control-Allow-Origin', '*');
 
-    // Disable caching so we'll always get the latest comments.
-    res.setHeader('Cache-Control', 'no-cache');
-    next();
+  // Disable caching so we'll always get the latest comments.
+  res.setHeader('Cache-Control', 'no-cache');
+  next();
 });
 
 // socket.io
@@ -47,41 +47,40 @@ io.on('connection', function(socket) {
 // receiving data on serial port
 
 var SerialPort = require("serialport");
+var serialport = process.platform == "win32" ? "COM4" : "/dev/ttys002"
 
 // only run is this is on Windows
-if (process.platform == "win32") {
+var port = new SerialPort(serialport, {
+  baudRate: 9600
+});
 
-  var port = new SerialPort("COM3", {
-    baudRate: 9600
-  });
+port.on('open', function() {
+  console.log('Serial Port Opened, ready to receive data.');
+});
 
-  port.on('open', function() {
-    console.log('Serial Port Opened, ready to receive data.');
-  });
+port.on('error', function(err) {
+  console.log('Error: ', err.message);
+});
 
-  port.on('error', function(err) {
-    console.log('Error: ', err.message);
-  });
+port.on('data', function(data) {
+  var dataString = data.toString('utf-8');
 
-  port.on('data', function(data) {
-    var dataString = data.toString('utf-8');
+  console.log("\n========================");
+  console.log('received data from scale:');
+  console.log(dataString);
 
-    console.log("\n========================");
-    console.log('received data from scale:');
-    console.log(dataString);
+  // receivies something like "☻1   22520    00"
+  // parse it
+  var elements = dataString.split("  ");
+  var mainWeightString = elements[elements.length - 3];
+  var mainWeight = parseInt(mainWeightString);
+  console.log(`parsed out main weight is ${mainWeight}. Will send to browser.`);
+  console.log("=======================");
 
-    // receivies something like "☻1   22520    00"
-    // parse it
-    var elements = dataString.split("  ");
-    var mainWeightString = elements[elements.length - 3];
-    var mainWeight = parseInt(mainWeightString);
-    console.log(`parsed out main weight is ${mainWeight}. Will send to browser.`);
-    console.log("=======================");
+  // when data is received on serial port, send it to the browser
+  io.emit('newWeight', mainWeight);
+});
 
-    // when data is received on serial port, send it to the browser
-    io.emit('newWeight', mainWeight);
-  });
-}
 
 
 // start the http server

@@ -1,6 +1,7 @@
 
 var SerialPort = require("serialport");
-var port = new SerialPort("COM4", {
+var serialport = process.platform == "win32" ? "COM4" : "/dev/ttys001"
+var port = new SerialPort(serialport, {
   baudRate: 9600
 });
 
