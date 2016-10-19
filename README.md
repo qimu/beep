@@ -1,17 +1,19 @@
-# Qi's React.js boilerplate
+# Serial-beep
+
+## Intro
+
+* To be Written
 
 ## Features
 
-* Node.js serve the index.html and bundled js
-* css is bundled with webpack too
-* webpack watches new changes and compile the new bundle.js on-the-fly
+* To be Written
 
 ## How to start
 
 Run:  
 ```
 npm install
-npm start
+npm run start
 ```
 
 Check your http://localhost:3000/ or  `open http://localhost:3000/`
@@ -19,7 +21,7 @@ Check your http://localhost:3000/ or  `open http://localhost:3000/`
 ## How to start code
 
 Run:  
-`npm run webpack-watch`
+`npm run watch`
 
 ## How to start server
 Run:  
