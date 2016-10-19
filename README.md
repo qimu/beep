@@ -1,5 +1,9 @@
 # Serial-beep
 
+## Demo
+
+[![Video Demo](http://img.youtube.com/vi/HgL_dYE1fHA/0.jpg)](http://www.youtube.com/watch?v=HgL_dYE1fHA)
+
 ## Intro
 
 * To be Written
