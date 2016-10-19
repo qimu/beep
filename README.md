@@ -32,7 +32,7 @@ To change to your desired port, open src/server/server.js, and change PORT_ON_MA
 
 ## How to start
 
-Node.js and npm have to be installed on your system. 
+Node.js and npm have to be installed on your system.
 
 Run:  
 ```
@@ -63,3 +63,20 @@ node uninstall-service
 ## Suggestion
 
 This project can be used as a demo for using node-serial library and socket.io library together in node.js.
+
+## Testing without Real Equipment Connected
+
+Create a pair of virtual serial port (technically, called null-modem), so one data inputted into one port is outputted from another.
+
+For Mac:
+
+```
+brew install socat
+socat -d -d pty,raw,echo=0 pty,raw,echo=0
+```
+
+For Windows:
+
+Use [com0com](https://code.google.com/archive/p/powersdr-iq/downloads)
+
+Then use the write-emulator to write data into one virtual port, the other port will get data.
