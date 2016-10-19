@@ -32,6 +32,8 @@ To change to your desired port, open src/server/server.js, and change PORT_ON_MA
 
 ## How to start
 
+Node.js and npm have to be installed on your system. 
+
 Run:  
 ```
 npm install
@@ -60,4 +62,4 @@ node uninstall-service
 
 ## Suggestion
 
-This project can be used as a demo for using node-serial library and socket.io library together in node.js. 
+This project can be used as a demo for using node-serial library and socket.io library together in node.js.
