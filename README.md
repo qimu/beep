@@ -35,8 +35,26 @@ To change to your desired port, open src/server/server.js, and change PORT_ON_MA
 Run:  
 ```
 npm install
-npm webpack
+npm install nodemon -g
+npm run webpack
 npm run start
+```
+
+## Run the Node.js Server as a Service Under Windows
+
+Run:
+```
+npm install -g node-windows
+npm link node-windows
+cd src\utilities
+node install-service
+```
+
+To remove the service, run:
+
+```
+cd src\utilities
+node uninstall-service
 ```
 
 Check your http://localhost:3000/ or  `open http://localhost:3000/`
