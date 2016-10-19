@@ -55,7 +55,7 @@ var port = new SerialPort(serialport, {
 });
 
 port.on('open', function() {
-  console.log('Serial Port Opened, ready to receive data.');
+  console.log(`Serial Port ${serialport} Opened, ready to receive data.`);
 });
 
 port.on('error', function(err) {
