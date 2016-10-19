@@ -1,6 +1,9 @@
+const PORT_ON_MAC = "/dev/ttys001";
+const PORT_ON_WIN = "COM6";
+
 
 var SerialPort = require("serialport");
-var serialport = process.platform == "win32" ? "COM6" : "/dev/ttys001"
+var serialport = process.platform == "win32" ? PORT_ON_WIN : PORT_ON_MAC
 var port = new SerialPort(serialport, {
   baudRate: 9600
 });
