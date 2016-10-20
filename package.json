@@ -6,7 +6,9 @@
   "scripts": {
     "start": "nodemon src/server/index.js",
     "webpack": "webpack --config config/webpack.js",
-    "watch": "webpack --config config/webpack.js --watch --colors"
+    "watch": "webpack --config config/webpack.js --watch --colors",
+    "write-emulator": "nodemon src/server/serial-write-emulator.js",
+    "mac-null-modem": "socat -d -d pty,raw,echo=0 pty,raw,echo=0"
   },
   "author": "Mu, Qi",
   "license": "MIT",

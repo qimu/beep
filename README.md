@@ -68,14 +68,25 @@ This project can be used as a demo for using node-serial library and socket.io l
 
 Create a pair of virtual serial port (technically, called null-modem), so one data inputted into one port is outputted from another.
 
-For Mac:
+### For Mac:
 
+Run virtual ports:
 ```
 brew install socat
-socat -d -d pty,raw,echo=0 pty,raw,echo=0
+npm run mac-null-modem
+```
+Run write emulator:
+```
+npm run write-emulator
+```
+Run server:
+```
+npm run start
 ```
 
-For Windows:
+You may need to change ports in code to fit your configuration.
+
+### For Windows:
 
 Use [com0com](https://code.google.com/archive/p/powersdr-iq/downloads)
 

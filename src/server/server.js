@@ -1,4 +1,4 @@
-const PORT_ON_MAC = "/dev/ttys002";
+const PORT_ON_MAC = "/dev/ttys001";
 const PORT_ON_WIN = "COM5";
 
 import path from 'path';
